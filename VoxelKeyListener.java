@@ -86,6 +86,10 @@ public class VoxelKeyListener  implements KeyListener {
             case '4':
                 vp.loadMap(3);
                 break;
+            case '5':
+                vp.loadMap(4);
+                break;
+
         }
     }
 

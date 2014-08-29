@@ -16,7 +16,7 @@ import javax.imageio.*;
  */
 
 public class Map {
-    private static String[] names = {"greenhills", "desert", "artic", "tropic"};
+    private static String[] names = {"greenhills", "desert", "artic", "tropic", "checker"};
     
     public byte[] heightMap;
     public int[] textureMap;

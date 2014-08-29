@@ -188,6 +188,7 @@ public class VoxelPanel extends JPanel implements Runnable {
         //calc stepsize in x and y (normalize)
         stepX = stepX / r;
         stepY = stepY / r;
+        double stepZ = distance / r;
         
         //draw front to back
         int bottom_y = 0;
@@ -200,7 +201,7 @@ public class VoxelPanel extends JPanel implements Runnable {
             //inc by step size
             posX += stepX;
             posY += stepY;
-            distZ += 1;
+            distZ += stepZ;
             
             //get map height + color
             int map_height = map.getHeight(posX, posY);
