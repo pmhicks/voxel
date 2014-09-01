@@ -6,7 +6,7 @@ public class Util {
         //blue = blue & 0xFF;
         //return (0xFF000000 | red | green | blue);
         
-        return ( 0xFF000000 | ((red <<16 ) & 0x00FF0000) | ((green << 8) & 0x0000FF00) | (blue = blue & 0xFF) ) ;
+        return ( 0xFF000000 | ((red <<16 ) & 0x00FF0000) | ((green << 8) & 0x0000FF00) | (blue & 0xFF) ) ;
     }
 
     
