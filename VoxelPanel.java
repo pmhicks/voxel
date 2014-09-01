@@ -46,7 +46,12 @@ public class VoxelPanel extends JPanel implements Runnable {
     boolean dir_up = false;
     boolean dir_down = false;
     boolean do_fog = true;
-    
+
+    //position/fps info
+    StringBuilder infoString = new StringBuilder();
+    Formatter formatter = new Formatter(infoString, Locale.US);
+
+
     public VoxelPanel() {
         this.animator = new SwingAnimator(this, DELAY);
         
@@ -135,7 +140,7 @@ public class VoxelPanel extends JPanel implements Runnable {
     @Override
     public void run() {
         updatePosition();
-        repaint();
+        paintImmediately(0,0,VIEW_WIDTH,VIEW_HEIGHT);
         Toolkit.getDefaultToolkit().sync();
     }
 
@@ -162,12 +167,11 @@ public class VoxelPanel extends JPanel implements Runnable {
             drawline(i, playerX, playerY, rotx + playerX, roty + playerY);
         }
         g2.drawImage(image, 0, 0, this);
-        
-        StringBuilder sb = new StringBuilder();
-        Formatter formatter = new Formatter(sb, Locale.US);
+
+        infoString.setLength(0);
         formatter.format("x: %1$.1f y: %2$.1f h:%3$d dir: %4$d  height:%5$d FPS:%6$d", playerX, playerY, cameraH, direction,  map.getHeight(playerX, playerY), animator.fps);
         g2.setColor(Color.YELLOW);
-        g2.drawString(sb.toString(), 1, 15);
+        g2.drawString(infoString.toString(), 1, 15);
      }
     
     /*
@@ -208,8 +212,8 @@ public class VoxelPanel extends JPanel implements Runnable {
             int colorRGB = map.getColor(posX,posY);
             
             //add fog
-            if(do_fog && distZ > r) {
-                fogFactor = (int)( (distZ - r) * .25); //arbitrary value that looked good
+            if(do_fog && distZ > distance) {
+                fogFactor = (int)( (distZ - distance) * .25); //arbitrary value that looked good
                 if(fogFactor > 256) {
                     fogFactor = 256;
                 }
